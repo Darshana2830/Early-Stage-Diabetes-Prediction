@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Early Diabetes Risk Prediction</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    margin: 0;
+    padding: 25px;
+}
+.container {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 28px;
+    border-radius: 14px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 18px;
+}
+label { font-weight: bold; display: block; margin-bottom: 7px; }
+input, select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+}
+button {
+    margin-top: 24px;
+    padding: 13px 25px;
+    background: #2563eb;
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.result, .error {
+    padding: 16px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+.result { background: #dcfce7; }
+.error { background: #fee2e2; }
+.note { font-size: 12px; color: #64748b; margin-top: 25px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Early Diabetes Risk Prediction</h1>
+<p>Enter the information below to obtain an educational ML model prediction.</p>
+
+<form method="POST">
+<div class="grid">
+<div>
+<label>Age</label>
+<input type="number" name="age" min="1" max="120" required>
+</div>
+{% for feature in [
+'gender','polyuria','polydipsia','sudden_weight_loss',
+'weakness','polyphagia','genital_thrush','visual_blurring',
+'itching','irritability','delayed_healing','partial_paresis',
+'muscle_stiffness','alopecia','obesity'
+] %}
+<div>
+<label>{{ feature.replace('_',' ').title() }}</label>
+<select name="{{ feature }}" required>
+{% if feature == 'gender' %}
+<option value="1">Male</option>
+<option value="0">Female</option>
+{% else %}
+<option value="1">Yes</option>
+<option value="0">No</option>
+{% endif %}
+</select>
+</div>
+{% endfor %}
+</div>
+<button type="submit">Predict Diabetes Risk</button>
+</form>
+
+{% if result %}
+<div class="result">
+<h2>Prediction: {{ result }}</h2>
+</div>
+{% endif %}
+
+{% if error %}
+<div class="error">{{ error }}</div>
+{% endif %}
+
+<p class="note">
+Educational demonstration only. This model is not a medical diagnostic
+device and must not be used to make healthcare decisions.
+</p>
+</div>
+</body>
+</html>

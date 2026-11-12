@@ -1,0 +1,12 @@
+{
+    "project_name": "Early Stage Diabetes Risk Prediction",
+    "best_model": "Random Forest",
+    "accuracy": 94.12,
+    "region": "ap-southeast-2",
+    "s3_bucket": "early-diabetes-ml-56b2351db2",
+    "model_name": "early-diabetes-prediction-model",
+    "endpoint_name": "early-diabetes-prediction-endpoint",
+    "endpoint_status": "InService",
+    "execution_role": "EarlyDiabetesSageMakerRole",
+    "framework": "Scikit-learn 1.4-2"
+}
